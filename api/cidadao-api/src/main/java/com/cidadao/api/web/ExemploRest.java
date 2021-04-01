@@ -19,43 +19,43 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cidadao.api.core.BusinessException;
-import com.cidadao.api.dto.UsuarioDTO;
-import com.cidadao.api.service.IUsuarioService;
+import com.cidadao.api.dto.ExemploDTO;
+import com.cidadao.api.service.IExemploService;
 
 @RestController
-@RequestMapping("/usuario")
-public class UsuarioRest {
+@RequestMapping("/exemplo")
+public class ExemploRest {
 
 	@Autowired
-	private IUsuarioService service;
+	private IExemploService service;
 
 	@Autowired
 	private MessageSource messageSource;
 
 	@PostMapping("/salvar")
-	public ResponseEntity<?> salvar(@RequestBody UsuarioDTO dto) {
+	public ResponseEntity<?> salvar(@RequestBody ExemploDTO dto) {
 
 		if (StringUtils.isBlank(dto.getNome())) {
 			throw new BusinessException(
 					messageSource.getMessage("mensagem.campo.obrigatorio", null, LocaleContextHolder.getLocale()));
 		}
 
-		UsuarioDTO usuario = service.salvar(dto);
+		ExemploDTO exemplo = service.salvar(dto);
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
+		return ResponseEntity.status(HttpStatus.CREATED).body(exemplo);
 	}
 
 	@PutMapping("/alterar")
-	public ResponseEntity<?> alterar(@RequestBody UsuarioDTO dto) {
+	public ResponseEntity<?> alterar(@RequestBody ExemploDTO dto) {
 
 		if (StringUtils.isBlank(dto.getNome())) {
 			throw new BusinessException(
 					messageSource.getMessage("mensagem.campo.obrigatorio", null, LocaleContextHolder.getLocale()));
 		}
 
-		UsuarioDTO usuario = service.alterar(dto);
+		ExemploDTO exemplo = service.alterar(dto);
 
-		return ResponseEntity.ok(usuario);
+		return ResponseEntity.ok(exemplo);
 	}
 
 	@DeleteMapping("/{id}")
@@ -65,12 +65,12 @@ public class UsuarioRest {
 	}
 
 	@GetMapping("/{id}")
-	public UsuarioDTO pesquisaPorId(@PathVariable Long id) {
+	public ExemploDTO pesquisaPorId(@PathVariable Long id) {
 		return service.pesquisaPorId(id);
 	}
 
 	@GetMapping("/listar")
-	public List<UsuarioDTO> listar() {
+	public List<ExemploDTO> listar() {
 		return service.listar();
 	}
 

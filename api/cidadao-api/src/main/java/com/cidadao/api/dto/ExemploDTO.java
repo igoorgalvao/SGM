@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class UsuarioDTO {
+public class ExemploDTO {
 
 	private Long id;
 	private String nome;

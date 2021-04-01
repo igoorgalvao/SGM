@@ -1,8 +1,5 @@
 package com.cidadao.api.core;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -30,8 +27,8 @@ public class CidadaoExcepetionHandler extends ResponseEntityExceptionHandler {
 		String mensagemUsuario = messageSource.getMessage("mensagem.invalida", null, LocaleContextHolder.getLocale());
 		String mensagemDesenvolvedor = ExceptionUtils.getRootCauseMessage(ex);
 
-		List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
-		return handleExceptionInternal(ex, erros, headers, HttpStatus.BAD_REQUEST, request);
+		return handleExceptionInternal(ex, new Erro(mensagemUsuario, mensagemDesenvolvedor), headers,
+				HttpStatus.BAD_REQUEST, request);
 	}
 
 	@ExceptionHandler({ BusinessException.class })
@@ -44,9 +41,9 @@ public class CidadaoExcepetionHandler extends ResponseEntityExceptionHandler {
 		}
 
 		String mensagemDesenvolvedor = mensagemUsuario;
-		List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
 
-		return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+		return handleExceptionInternal(ex, new Erro(mensagemUsuario, mensagemDesenvolvedor), new HttpHeaders(),
+				HttpStatus.BAD_REQUEST, request);
 	}
 
 }

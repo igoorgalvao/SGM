@@ -13,8 +13,8 @@ const appRoutes: Routes = [
     canLoad: [AuthGuard]
   },
   {
-    path: 'usuario',
-    loadChildren: () => import(`./usuario/usuario.module`).then(m => m.UsuarioModule),
+    path: 'exemplo',
+    loadChildren: () => import(`./exemplo/exemplo.module`).then(m => m.ExemploModule),
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
     canLoad: [AuthGuard]

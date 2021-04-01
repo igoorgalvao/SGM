@@ -14,20 +14,20 @@ import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 
 @Entity
-@Table(name = "USUARIO", schema = "CIDADAO")
+@Table(name = "EXEMPLO", schema = "CIDADAO")
 @Data
 @Builder(builderClassName = "Builder")
 @EqualsAndHashCode
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class Usuario {
+public class Exemplo {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID_USUARIO")
+	@Column(name = "ID_EXEMPLO")
 	private Long id;
 
-	@Column(name = "NOME_USUARIO")
+	@Column(name = "NOME_EXEMPLO")
 	private String nome;
 
 }

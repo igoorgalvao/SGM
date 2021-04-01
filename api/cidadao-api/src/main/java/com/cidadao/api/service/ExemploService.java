@@ -9,22 +9,22 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cidadao.api.dao.UsuarioDAO;
-import com.cidadao.api.dto.UsuarioDTO;
-import com.cidadao.api.entidade.Usuario;
+import com.cidadao.api.dao.ExemploDAO;
+import com.cidadao.api.dto.ExemploDTO;
+import com.cidadao.api.entidade.Exemplo;
 
 @Service
 @Transactional(readOnly = true)
-public class UsuarioService implements IUsuarioService {
+public class ExemploService implements IExemploService {
 
 	@Autowired
-	private UsuarioDAO dao;
+	private ExemploDAO dao;
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-	public UsuarioDTO salvar(UsuarioDTO dto) {
+	public ExemploDTO salvar(ExemploDTO dto) {
 		// @formatter:off
-		dao.save(Usuario.builder()
+		dao.save(Exemplo.builder()
 					.id(dto.getId())
 					.nome(dto.getNome())
 					.build());
@@ -35,19 +35,19 @@ public class UsuarioService implements IUsuarioService {
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-	public UsuarioDTO alterar(UsuarioDTO dto) {
+	public ExemploDTO alterar(ExemploDTO dto) {
 
 		if (dto.getId() == null) {
 			throw new IllegalArgumentException();
 		}
 
-		Optional<Usuario> usuario = dao.findById(dto.getId());
-		if (!usuario.isPresent()) {
+		Optional<Exemplo> exemplo = dao.findById(dto.getId());
+		if (!exemplo.isPresent()) {
 			throw new IllegalArgumentException();
 		}
 
 		// @formatter:off
-		dao.save(Usuario.builder()
+		dao.save(Exemplo.builder()
 				.id(dto.getId())
 				.nome(dto.getNome())
 				.build());
@@ -65,11 +65,11 @@ public class UsuarioService implements IUsuarioService {
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	public List<UsuarioDTO> listar() {
+	public List<ExemploDTO> listar() {
 		return dao.findAll().stream().map(item ->
 
 		// @formatter:off
-			UsuarioDTO.builder()
+			ExemploDTO.builder()
 			.id(item.getId())
 			.nome(item.getNome())
 			.build()
@@ -80,14 +80,14 @@ public class UsuarioService implements IUsuarioService {
 
 	@Override
 	@Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
-	public UsuarioDTO pesquisaPorId(Long id) {
-		Optional<Usuario> usuario = dao.findById(id);
+	public ExemploDTO pesquisaPorId(Long id) {
+		Optional<Exemplo> exemplo = dao.findById(id);
 
-		if (usuario.isPresent()) {
+		if (exemplo.isPresent()) {
 			// @formatter:off
-			return UsuarioDTO.builder()
-					.id(usuario.get().getId())
-					.nome(usuario.get().getNome())
+			return ExemploDTO.builder()
+					.id(exemplo.get().getId())
+					.nome(exemplo.get().getNome())
 					.build();
 			// @formatter:on
 
