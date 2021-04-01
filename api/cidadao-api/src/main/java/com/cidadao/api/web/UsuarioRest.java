@@ -60,7 +60,7 @@ public class UsuarioRest {
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void excluir(Long id) {
+	public void excluir(@PathVariable Long id) {
 		service.excluir(id);
 	}
 
