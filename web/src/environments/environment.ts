@@ -7,5 +7,11 @@ export const environment = {
 	envName: 'loc',
 	urlbackend: 'http://localhost',
 	port: '8081',
-	contextPath: 'cidadao-api/'
+	contextPath: 'cidadao-api/',
+
+	keycloak: {
+		issuer: 'http://localhost:8080/auth/',
+		realm: 'SGM',
+		clientId: 'sgm-ui',
+	  }
 };
