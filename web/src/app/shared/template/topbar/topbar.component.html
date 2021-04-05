@@ -9,8 +9,12 @@
             </a>
         </li>
         <li>
+            <i class="fas fa-user" style="color: rgb(59, 21, 197);"></i>&nbsp;
+            <span>{{usuarioLogado?.primeiroNome}} {{usuarioLogado?.sobrenome}}</span>
+        </li>
+        <li>
             <a (click)="logout()">
-                <i class="pi pi-power-off"></i>&nbsp;
+                <i class="fas fa-power-off"></i>&nbsp;
                 <span>Sair</span>
             </a>
         </li>

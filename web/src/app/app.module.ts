@@ -4,15 +4,33 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
-import { initializer } from 'src/utils/app-init';
+import { environment } from 'src/environments/environment';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
+import { DirectivesModule } from './shared/directives/directives.module';
 import { AuthGuard } from './shared/guard/auth.guard';
 import { FooterModule } from './shared/template/footer/footer.module';
 import { MenuModule } from './shared/template/menu/menu.module';
 import { TemplateModule } from './shared/template/template.module';
 import { TopBarModule } from './shared/template/topbar/topbar.module';
 
+
+function initializeKeycloak(keycloak: KeycloakService) {
+  return () =>
+    keycloak.init({
+      config: {
+        url: environment.keycloak.url_keycloack,
+        realm: environment.keycloak.realm,
+        clientId: environment.keycloak.clientId,
+      },
+      loadUserProfileAtStartUp: false,
+      initOptions: {
+        onLoad: 'login-required',
+        checkLoginIframe: true
+      },
+      bearerExcludedUrls: ['/assets'],
+    });
+}
 
 @NgModule({
   declarations: [
@@ -26,7 +44,7 @@ import { TopBarModule } from './shared/template/topbar/topbar.module';
     AppRoutingModule,
     HttpClientModule,
     KeycloakAngularModule,
-
+    DirectivesModule.forRoot(),
 
     TopBarModule,
     MenuModule,
@@ -36,10 +54,10 @@ import { TopBarModule } from './shared/template/topbar/topbar.module';
     AuthGuard,
     {
       provide: APP_INITIALIZER,
-      useFactory: initializer,
+      useFactory: initializeKeycloak,
+      multi: true,
       deps: [KeycloakService],
-      multi: true
-    }
+    },
   ],
 
   bootstrap: [AppComponent]

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
+import { SessaoService } from 'src/app/services/sessao.service';
+import { UsuarioLogado } from '../../model/usuario-logado';
 
 @Component({
   selector: 'app-topbar',
@@ -9,19 +11,27 @@ import { KeycloakService } from 'keycloak-angular';
 })
 export class TopBarComponent implements OnInit {
 
+  public usuarioLogado: UsuarioLogado;
+
   constructor(
     private router: Router,
-    private keycloakService: KeycloakService,
+    public sessaoService: SessaoService,
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.sessaoService.recuperarUsuarioLogado().then(retorno => {
+      this.usuarioLogado = retorno;
+    }, () => {
+      console.log('ERRO');
+    });
+  }
 
   toHome() {
     this.router.navigate(['/home']);
   }
 
   logout() {
-    this.keycloakService.logout();
+    this.sessaoService.sair();
   }
 
 }

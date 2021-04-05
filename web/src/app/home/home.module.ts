@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { KeycloakService } from 'keycloak-angular';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 
@@ -15,7 +16,7 @@ import { HomeComponent } from './home.component';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    HomeRoutingModule
+    HomeRoutingModule,
   ],
   providers: [],
 })

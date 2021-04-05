@@ -10,7 +10,7 @@ export const environment = {
 	contextPath: 'cidadao-api/',
 
 	keycloak: {
-		issuer: 'http://localhost:8080/auth/',
+		url_keycloack: 'http://localhost:8080/auth/',
 		realm: 'SGM',
 		clientId: 'sgm-ui',
 	  }

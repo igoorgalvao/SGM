@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { KeycloakService } from 'keycloak-angular';
-import { PrimeNGConfig } from 'primeng-lts/api';
+import { Component, OnInit } from '@angular/core';
+import { SessaoService } from './services/sessao.service';
+import { UsuarioLogado } from './shared/model/usuario-logado';
 
 @Component({
   selector: 'app-root',
@@ -9,23 +8,17 @@ import { PrimeNGConfig } from 'primeng-lts/api';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'sgm-ui';
   menuActive: boolean;
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private keycloakService: KeycloakService,
-    private primengConfig: PrimeNGConfig
-  ) { }
-
-  ngOnInit() {
+  constructor() {
   }
 
-  logout() {
-    this.keycloakService.logout();
+  ngOnInit(): void {
   }
+
+
 
 }
 
