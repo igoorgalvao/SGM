@@ -1,0 +1,19 @@
+<div class="layout-topbar">
+    <a (click)="toHome()" class="container img" style="cursor: pointer;">
+        <img alt="logo" [src]="'/assets/images/logo.png'" width="220" height="200" />
+    </a>
+    <ul #topbarMenu class="topbar-menu">
+        <li>
+            <a [routerLink]="['/exemplo']">
+                <span>Exemplo</span>
+            </a>
+        </li>
+        <li>
+            <a (click)="logout()">
+                <i class="pi pi-power-off"></i>&nbsp;
+                <span>Sair</span>
+            </a>
+        </li>
+    </ul>
+
+</div>
