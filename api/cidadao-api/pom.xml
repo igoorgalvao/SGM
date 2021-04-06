@@ -3,28 +3,65 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.4.4</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
+
+	<name>cidadao-api</name>
+	<description>Modulo de serviço ao cidadão</description>
+
 	<groupId>com.cidadao-api</groupId>
 	<artifactId>cidadao-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>cidadao-api</name>
-	<description>Modulo de serviço ao cidadão</description>
+
+
+
 	<properties>
 		<java.version>11</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+
+
+		<spring-cloud.version>2020.0.2</spring-cloud.version>
+		<spring-cloud.version>1.4.7.RELEASE</spring-cloud.version>
+		<lombok.version>1.18.18</lombok.version>
+		<commons-lang3.version>3.11</commons-lang3.version>
 	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>2020.0.0</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-feign</artifactId>
+			<version>1.4.7.RELEASE</version>
 		</dependency>
 
 		<dependency>
@@ -53,17 +90,15 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.18</version>
+			<version>${lombok.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>3.11</version>
+			<version>${commons-lang3.version}</version>
 		</dependency>
-
-
 
 	</dependencies>
 

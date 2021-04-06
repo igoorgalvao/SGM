@@ -1,4 +1,4 @@
-package com.cidadao.api.entidade;
+package com.cidadao.api.entidade.stur;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,20 +14,20 @@ import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 
 @Entity
-@Table(name = "EXEMPLO", schema = "CIDADAO")
+@Table(name = "EXEMPLO_STUR", schema = "`STUR`")
 @Data
 @Builder(builderClassName = "Builder")
 @EqualsAndHashCode
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class Exemplo {
+public class ExemploStur {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID_EXEMPLO")
+	@Column(name = "ID_EXEMPLO_STUR")
 	private Long id;
 
-	@Column(name = "NOME_EXEMPLO")
+	@Column(name = "NOME_EXEMPLO_STUR")
 	private String nome;
 
 }

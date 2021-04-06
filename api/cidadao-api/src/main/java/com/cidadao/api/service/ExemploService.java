@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cidadao.api.dao.ExemploDAO;
+import com.cidadao.api.dao.datasource.cidadaoapi.ExemploDAO;
 import com.cidadao.api.dto.ExemploDTO;
-import com.cidadao.api.entidade.Exemplo;
+import com.cidadao.api.entidade.cidadaoapi.Exemplo;
 
 @Service
 @Transactional(readOnly = true)
