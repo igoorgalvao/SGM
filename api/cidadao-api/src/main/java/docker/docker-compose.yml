@@ -1,14 +1,53 @@
 version: '3.7'
+
+volumes:
+  pg_data:
+  db_imposto:
+  postgres_data:
+      driver: local
+
 services:
-  db:
+  db_imposto_api:
     image: mysql:5.7
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: stur
+      MYSQL_DATABASE: imposto
     ports:
       - "3306:3306"
     volumes:
-      - db_stur:/var/lib/mysql
-      
-volumes:
-  db_stur:
+      - db_imposto:/var/lib/mysql
+  postgres_stur:
+      image: postgres:13.2
+      volumes:
+        - pg_data:/var/lib/postgresql/data
+      environment:
+        POSTGRES_DB: stur
+        POSTGRES_USER: stur
+        POSTGRES_PASSWORD: stur
+      ports:
+      - 5961:5432      
+  postgres:
+      image: postgres
+      volumes:
+        - postgres_data:/var/lib/postgresql/data
+      environment:
+        POSTGRES_DB: keycloak
+        POSTGRES_USER: keycloak
+        POSTGRES_PASSWORD: password
+  keycloak:
+      image: quay.io/keycloak/keycloak:12.0.4
+      environment:
+        DB_VENDOR: POSTGRES
+        DB_ADDR: postgres
+        DB_DATABASE: keycloak
+        DB_USER: keycloak
+        DB_SCHEMA: public
+        DB_PASSWORD: password
+        KEYCLOAK_USER: admin
+        KEYCLOAK_PASSWORD: admin
+        # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the PostgreSQL JDBC driver documentation in order to use it.
+        #JDBC_PARAMS: "ssl=true"
+      ports:
+        - 8080:8080
+      depends_on:
+        - postgres

@@ -2,8 +2,6 @@ package com.cidadao.api.entidade.stur;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -14,20 +12,20 @@ import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 
 @Entity
-@Table(name = "EXEMPLO_STUR", schema = "`STUR`")
+@Table(name = "TIPO_PESSOA", schema = "STUR_IMPOSTO")
 @Data
 @Builder(builderClassName = "Builder")
 @EqualsAndHashCode
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class ExemploStur {
+public class TipoPessoa {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID_EXEMPLO_STUR")
+	@Column(name = "NU_TIPO_PESSOA")
 	private Long id;
 
-	@Column(name = "NOME_EXEMPLO_STUR")
+	@Column(name = "DE_TIPO_PESSOA")
 	private String nome;
 
 }
+
