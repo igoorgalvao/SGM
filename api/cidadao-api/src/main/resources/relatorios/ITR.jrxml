@@ -35,7 +35,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[PREFEITURA MUNICIPAL BOM DESTINO - IPTU]]></text>
+				<text><![CDATA[PREFEITURA MUNICIPAL BOM DESTINO - ITR]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
@@ -102,11 +102,11 @@
 				<textFieldExpression><![CDATA[$F{pagador}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="470" y="30" width="261" height="81" backcolor="#BFBFBF" uuid="40810efa-a55d-4528-b532-f8334c674f81"/>
+				<reportElement x="470" y="30" width="261" height="81" backcolor="#BFBFBF" uuid="46f1409a-867c-4129-bd09-782fd2341189"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="33"/>
 				</textElement>
-				<text><![CDATA[IPTU]]></text>
+				<text><![CDATA[ITR]]></text>
 			</staticText>
 		</band>
 	</detail>

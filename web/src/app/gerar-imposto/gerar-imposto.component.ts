@@ -50,7 +50,7 @@ export class GerarImpostoComponent implements OnInit {
 
     this.service.gerarImpostoPorTipoPessoa(this.dto).subscribe(retorno => {
       const url = window.URL.createObjectURL(retorno.body);
-      FileSaver.saveAs(url, this.dto.tipoPessoa == 1 ? "IPTU.pdf" : "ITR.pdf");
+      FileSaver.saveAs(url, this.dto.tipoPessoa == 3 ? "ITR.pdf" : "IPTU.pdf");
     }, (erro: HttpErrorResponse) => {
       this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'IPTU/ITR não localizado' });
     });

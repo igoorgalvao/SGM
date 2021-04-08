@@ -15,10 +15,10 @@ public interface ImpostoSturDAO extends JpaRepository<ImpostoMunicipal, Long> {
 	@Query(" SELECT ENT FROM ImpostoMunicipal                   ENT                                                                            "
 			+ " INNER JOIN FETCH ENT.pagador                    PAGADOR                                                                        "
 			+ " INNER JOIN FETCH PAGADOR.tipoPessoa             TP                                                                             "
-			+ " 	WHERE  TP.id           = :#{#dto.getTipoPessoa()}                                                                          "
-			+ " 	AND    ENT.cep         = :#{#dto.getCepSemMascara()}                                                                                 "
+			+ " 	WHERE  ENT.cep         = :#{#dto.getCepSemMascara()}                                                                       "
+//			+ " 	AND    TP.id           = :#{#dto.getTipoPessoa()}                                                                          "
 			+ " 	AND    ENT.numero      = :#{#dto.getNumero()}                                                                              "
-			+ " 	AND    PAGADOR.cpfCnpj = :#{#dto.getCpfCnpjSemMascara()}                                                                             ")
+			+ " 	AND    PAGADOR.cpfCnpj = :#{#dto.getCpfCnpjSemMascara()}                                                                   ")
 	@Transactional(readOnly = true)
 	Optional<ImpostoMunicipal> consultarImpostoMunicipal(@Param("dto") GerarImpostoDTO dto);
 

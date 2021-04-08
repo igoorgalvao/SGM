@@ -1,6 +1,6 @@
 package com.cidadao.api.service;
 
-import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,7 +8,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 
-import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cidadao.api.core.BusinessException;
 import com.cidadao.api.dao.datasource.stur.ImpostoSturDAO;
+import com.cidadao.api.dto.BoletoImpostoDTO;
 import com.cidadao.api.dto.DownloadFileDTO;
 import com.cidadao.api.dto.GerarImpostoDTO;
 import com.cidadao.api.entidade.stur.ImpostoMunicipal;
@@ -57,19 +57,28 @@ public class ImpostoService implements IImpostoService {
 			throw new BusinessException(messageSource.getMessage("mensagem.campo.obrigatorio", null, LocaleContextHolder.getLocale()));
 		}
 
-		if (gerarImpostoDTO.getTipoPessoa().equals(TipoPessoaEnum.RURAL.getId())) {
-			dto.setNomeArquivo("ITR.pdf");
-		} else {
-			dto.setNomeArquivo("IPTU.pdf");
-		}
+		List<BoletoImpostoDTO> lista = new ArrayList<>();
 
-		List<ImpostoMunicipal> lista = new ArrayList<>();
-		lista.add(impostoMunicipal.get());
+		// @formatter:off
+		lista.add(BoletoImpostoDTO.builder()
+				.pagador(impostoMunicipal.get().getPagador().getNomePagador())
+				.cep(impostoMunicipal.get().getCep().toString())
+				.dataGeracao(new SimpleDateFormat("dd/MM/yyyy").format(impostoMunicipal.get().getDataGeracao()))
+				.dataVencimento(new SimpleDateFormat("dd/MM/yyyy").format(impostoMunicipal.get().getDataVencimento()))
+				.multa(impostoMunicipal.get().getValorMulta())
+				.valor(impostoMunicipal.get().getValorDocumento())
+				.build());
+		// @formatter:on
 
 		Map<String, Object> parametros = new HashMap<>();
 		parametros.put(JRParameter.REPORT_LOCALE, new Locale("pt", "BR"));
 
-		byte[] bytes = relatorioService.gerarRelatorioPdf("/relatorios/iptu.jasper", parametros, lista);
+		byte[] bytes = null;
+		if (gerarImpostoDTO.getTipoPessoa().equals(TipoPessoaEnum.RURAL.getId())) {
+			bytes = relatorioService.gerarRelatorioPdf("/relatorios/itr.jasper", parametros, lista);
+		} else {
+			bytes = relatorioService.gerarRelatorioPdf("/relatorios/iptu.jasper", parametros, lista);
+		}
 
 		dto.setBytes(bytes);
 		return dto;
