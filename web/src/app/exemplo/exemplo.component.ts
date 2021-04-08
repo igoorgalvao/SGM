@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ExemploService } from '../services/exemplo.service';
+import { ImpostoService } from '../services/imposto.service';
 import { Exemplo } from '../shared/model/exemplo';
 
 @Component({
@@ -16,11 +17,13 @@ export class ExemploComponent implements OnInit {
 
   constructor(
     private service: ExemploService,
+    private impostoService: ImpostoService,
   ) { }
 
   ngOnInit(): void {
 
   }
+
 
   consultarPorId() {
     this.service.pesquisarPorId(1).subscribe(retorno => {

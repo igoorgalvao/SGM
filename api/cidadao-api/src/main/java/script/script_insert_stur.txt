@@ -1,0 +1,28 @@
+
+--Tipo pessoa
+insert into stur_imposto.tipo_pessoa values(1,'Física');
+insert into stur_imposto.tipo_pessoa values(2,'Jurídica');
+insert into stur_imposto.tipo_pessoa values(3,'Rural');
+
+-- Pagador
+INSERT INTO stur_imposto.pagador (nu_pagador,nu_cpf_cnpj,no_pagador,nu_tipo_pessoa) VALUES (1,01983317110,'Igor Galvão de Oliveira',1);
+INSERT INTO stur_imposto.pagador (nu_pagador,nu_cpf_cnpj,no_pagador,nu_tipo_pessoa) VALUES (2,77965310015,'Eva Sousa',1);
+INSERT INTO stur_imposto.pagador (nu_pagador,nu_cpf_cnpj,no_pagador,nu_tipo_pessoa) VALUES (3,86852276074,'Afonso Oliveira',1);
+INSERT INTO stur_imposto.pagador (nu_pagador,nu_cpf_cnpj,no_pagador,nu_tipo_pessoa) VALUES (4,77424913000160,'Empresa Tecnologia Google',2);
+INSERT INTO stur_imposto.pagador (nu_pagador,nu_cpf_cnpj,no_pagador,nu_tipo_pessoa) VALUES (5,77424913000160,'Empresa Tecnologia Facebook',2);
+INSERT INTO stur_imposto.pagador (nu_pagador,nu_cpf_cnpj,no_pagador,nu_tipo_pessoa) VALUES (6,77424913000160,'Empresa Tecnologia Twitter',2);
+INSERT INTO stur_imposto.pagador (nu_pagador,nu_cpf_cnpj,no_pagador,nu_tipo_pessoa) VALUES (7,77424913000160,'Joaquim Moraes',3);
+INSERT INTO stur_imposto.pagador (nu_pagador,nu_cpf_cnpj,no_pagador,nu_tipo_pessoa) VALUES (8,77424913000160,'Abreu da Silva',3);
+INSERT INTO stur_imposto.pagador (nu_pagador,nu_cpf_cnpj,no_pagador,nu_tipo_pessoa) VALUES (9,77424913000160,'Cabral Galvão',3);
+
+-- Imposto Municipal
+INSERT INTO stur_imposto.imposto_municipal (nu_imposto_municipal,dt_geracao,dt_vencimento,vl_documento,vl_multa,nu_pagador,nu_cep,nu_residencia) VALUES (1,current_timestamp, NOW() + INTERVAL '1 DAY',1000,500,1,72220255,'30');
+INSERT INTO stur_imposto.imposto_municipal (nu_imposto_municipal,dt_geracao,dt_vencimento,vl_documento,vl_multa,nu_pagador,nu_cep,nu_residencia) VALUES (2,current_timestamp, NOW() + INTERVAL '10 DAY',2500,0,2,72220255,'1');
+INSERT INTO stur_imposto.imposto_municipal (nu_imposto_municipal,dt_geracao,dt_vencimento,vl_documento,vl_multa,nu_pagador,nu_cep,nu_residencia) VALUES (3,current_timestamp, NOW() + INTERVAL '10 DAY',3000,20.4,3,72220255,'2');
+INSERT INTO stur_imposto.imposto_municipal (nu_imposto_municipal,dt_geracao,dt_vencimento,vl_documento,vl_multa,nu_pagador,nu_cep,nu_residencia) VALUES (4,current_timestamp, NOW() + INTERVAL '15 DAY',10000,4000.45,4,72220255,'3');
+INSERT INTO stur_imposto.imposto_municipal (nu_imposto_municipal,dt_geracao,dt_vencimento,vl_documento,vl_multa,nu_pagador,nu_cep,nu_residencia) VALUES (5,current_timestamp, NOW() + INTERVAL '15 DAY',2000,500,5,72220255,'4');
+INSERT INTO stur_imposto.imposto_municipal (nu_imposto_municipal,dt_geracao,dt_vencimento,vl_documento,vl_multa,nu_pagador,nu_cep,nu_residencia) VALUES (6,current_timestamp, NOW() + INTERVAL '15 DAY',3000,500,6,72220255,'5');
+INSERT INTO stur_imposto.imposto_municipal (nu_imposto_municipal,dt_geracao,dt_vencimento,vl_documento,vl_multa,nu_pagador,nu_cep,nu_residencia) VALUES (7,current_timestamp, NOW() + INTERVAL '20 DAY',400,50.50,7,72220255,'6');
+INSERT INTO stur_imposto.imposto_municipal (nu_imposto_municipal,dt_geracao,dt_vencimento,vl_documento,vl_multa,nu_pagador,nu_cep,nu_residencia) VALUES (8,current_timestamp, NOW() + INTERVAL '20 DAY',500,10.20,8,72220255,'7');
+INSERT INTO stur_imposto.imposto_municipal (nu_imposto_municipal,dt_geracao,dt_vencimento,vl_documento,vl_multa,nu_pagador,nu_cep,nu_residencia) VALUES (9,current_timestamp, NOW() + INTERVAL '20 DAY',600,20.30,9,72220255,'8');
+

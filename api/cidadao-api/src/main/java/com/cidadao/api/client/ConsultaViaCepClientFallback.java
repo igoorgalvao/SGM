@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 public class ConsultaViaCepClientFallback implements ConsultaViaCepClient {
 
     @Override
-    public EnderecoVO obterEnderecoPorCep(String cep) {
+    public EnderecoDTO obterEnderecoPorCep(String cep) {
         log.warn("Método de fallback executado para ..obterEnderecoPorCep");
-        return EnderecoVO.builder().complemento("Fallback").build();
+        return EnderecoDTO.builder().complemento("Fallback").build();
     }
 }

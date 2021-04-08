@@ -19,6 +19,13 @@ const appRoutes: Routes = [
     canActivateChild: [AuthGuard],
     canLoad: [AuthGuard]
   },
+  {
+    path: 'gerar-imposto',
+    loadChildren: () => import(`./gerar-imposto/gerar-imposto.module`).then(m => m.GerarImpostoModule),
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
+    canLoad: [AuthGuard]
+  },
 
   { path: '', pathMatch: 'full', redirectTo: '/home' },
   { path: '**', component: PaginaNaoEncontradaComponent }

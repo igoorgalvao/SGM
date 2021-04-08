@@ -34,6 +34,12 @@ public class ImpostoMunicipal {
 	@javax.persistence.JoinColumn(name = "NU_PAGADOR", referencedColumnName = "NU_PAGADOR")
 	private Pagador pagador;
 
+	@Column(name = "NU_CEP")
+	private Long cep;
+
+	@Column(name = "NU_RESIDENCIA")
+	private String numero;
+
 	@Column(name = "VL_DOCUMENTO")
 	private BigDecimal valorDocumento;
 

@@ -7,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class EnderecoVO {
+public class EnderecoDTO {
 
 	private String cep;
     private String logradouro;

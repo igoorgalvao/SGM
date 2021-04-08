@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+import { MessageService } from 'primeng-lts/api';
 import { environment } from 'src/environments/environment';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
