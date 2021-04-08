@@ -26,4 +26,6 @@ public class GerarImpostoDTO {
 
 	private Long cpfCnpjSemMascara;
 	private Long cepSemMascara;
+
+	private String usuarioAcesso;
 }

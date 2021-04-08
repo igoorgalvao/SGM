@@ -1,7 +1,9 @@
 package com.imposto.api.service;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -18,10 +20,12 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.imposto.api.core.BusinessException;
+import com.imposto.api.dao.datasource.impostoapi.HistoricoGeracaoImpostoDAO;
 import com.imposto.api.dao.datasource.stur.ImpostoSturDAO;
 import com.imposto.api.dto.BoletoImpostoDTO;
 import com.imposto.api.dto.DownloadFileDTO;
 import com.imposto.api.dto.GerarImpostoDTO;
+import com.imposto.api.entidade.impostoapi.HistoricoGeracaoImposto;
 import com.imposto.api.entidade.stur.ImpostoMunicipal;
 import com.imposto.api.enuns.TipoPessoaEnum;
 
@@ -35,6 +39,9 @@ public class ImpostoService implements IImpostoService {
 
 	@Autowired
 	private ImpostoSturDAO dao;
+
+	@Autowired
+	private HistoricoGeracaoImpostoDAO historicoGeracaoImpostoDAO;
 
 	@Autowired
 	private IRelatorioService relatorioService;
@@ -79,8 +86,20 @@ public class ImpostoService implements IImpostoService {
 		} else {
 			bytes = relatorioService.gerarRelatorioPdf("/relatorios/iptu.jasper", parametros, lista);
 		}
-
 		dto.setBytes(bytes);
+
+		// @formatter:off
+		HistoricoGeracaoImposto hstSave = HistoricoGeracaoImposto.builder()
+											.idImpostoMunicipal(impostoMunicipal.get().getId())
+											.usuarioAcesso(gerarImpostoDTO.getUsuarioAcesso())
+											.dataGeracao(new Date())
+											.documentoGerado(bytes)
+											.build();
+		// @formatter:on\s
+
+		/* Salva historico de geração de documento */
+		historicoGeracaoImpostoDAO.save(hstSave);
+
 		return dto;
 
 	}

@@ -4,7 +4,9 @@ import * as FileSaver from 'file-saver';
 import { MessageService, SelectItem } from 'primeng-lts/api';
 import { ImpostoService } from '../services/imposto.service';
 import { LocalidadeService } from '../services/localidade.service';
+import { SessaoService } from '../services/sessao.service';
 import { GerarImposto } from '../shared/model/gerar-imposto';
+import { UsuarioLogado } from '../shared/model/usuario-logado';
 
 
 @Component({
@@ -14,17 +16,26 @@ import { GerarImposto } from '../shared/model/gerar-imposto';
 })
 export class GerarImpostoComponent implements OnInit {
 
-  dto: GerarImposto = new GerarImposto();
+  public dto: GerarImposto = new GerarImposto();
+  public usuarioLogado: UsuarioLogado;
+
 
   tipoPessoa: SelectItem[] = [];
 
   constructor(
     private service: ImpostoService,
     private localidadeService: LocalidadeService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private sessaoService: SessaoService
   ) { }
 
   ngOnInit(): void {
+
+    this.sessaoService.recuperarUsuarioLogado().then(retorno => {
+      this.usuarioLogado = retorno;
+    }, () => {
+      console.log('ERRO');
+    });
 
     this.tipoPessoa = [
       { label: 'Física', value: 1 },
@@ -48,6 +59,7 @@ export class GerarImpostoComponent implements OnInit {
       return;
     }
 
+    this.dto.usuarioAcesso = this.usuarioLogado.email;
     this.service.gerarImpostoPorTipoPessoa(this.dto).subscribe(retorno => {
       const url = window.URL.createObjectURL(retorno.body);
       FileSaver.saveAs(url, this.dto.tipoPessoa == 3 ? "ITR.pdf" : "IPTU.pdf");

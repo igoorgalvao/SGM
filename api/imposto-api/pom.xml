@@ -26,9 +26,9 @@
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 
-
-		<spring-cloud.version>2020.0.2</spring-cloud.version>
-		<spring-cloud.version>1.4.7.RELEASE</spring-cloud.version>
+		<spring-cloud-feign>1.4.7.RELEASE</spring-cloud-feign>
+		<jaspert-version>6.16.0</jaspert-version>
+		<barbecue-version>1.5-beta1</barbecue-version>
 	</properties>
 
 	<dependencyManagement>
@@ -59,7 +59,7 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-feign</artifactId>
-			<version>1.4.7.RELEASE</version>
+			<version>${spring-cloud-feign}</version>
 		</dependency>
 
 		<dependency>
@@ -104,12 +104,12 @@
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports</artifactId>
-			<version>6.16.0</version>
+			<version>${jaspert-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sourceforge.barbecue</groupId>
 			<artifactId>barbecue</artifactId>
-			<version>1.5-beta1</version>
+			<version>${barbecue-version}</version>
 		</dependency>
 	</dependencies>
 

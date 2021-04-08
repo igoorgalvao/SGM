@@ -4,11 +4,15 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.imposto.api.core.BusinessException;
 import com.imposto.api.dao.datasource.impostoapi.ExemploDAO;
 import com.imposto.api.dto.ExemploDTO;
 import com.imposto.api.entidade.impostoapi.Exemplo;
@@ -20,9 +24,17 @@ public class ExemploService implements IExemploService {
 	@Autowired
 	private ExemploDAO dao;
 
+	@Autowired
+	private MessageSource messageSource;
+
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public ExemploDTO salvar(ExemploDTO dto) {
+
+		if (StringUtils.isBlank(dto.getNome())) {
+			throw new BusinessException(messageSource.getMessage("mensagem.campo.obrigatorio", null, LocaleContextHolder.getLocale()));
+		}
+
 		// @formatter:off
 		dao.save(Exemplo.builder()
 					.id(dto.getId())
@@ -39,6 +51,10 @@ public class ExemploService implements IExemploService {
 
 		if (dto.getId() == null) {
 			throw new IllegalArgumentException();
+		}
+
+		if (StringUtils.isBlank(dto.getNome())) {
+			throw new BusinessException(messageSource.getMessage("mensagem.campo.obrigatorio", null, LocaleContextHolder.getLocale()));
 		}
 
 		Optional<Exemplo> exemplo = dao.findById(dto.getId());

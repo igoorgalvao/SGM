@@ -8,5 +8,6 @@ export class GerarImposto {
     public endereco: string;
     public cep: string;
     public numero: string;
+    public usuarioAcesso: String | undefined;
 
 }
