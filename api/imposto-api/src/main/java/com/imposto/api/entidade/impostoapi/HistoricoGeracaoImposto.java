@@ -18,7 +18,7 @@ import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 
 @Entity
-@Table(name = "HST_GERACAO_IMPOSTO", schema = "IMPOSTO")
+@Table(name = "HST_GERACAO_IMPOSTO")
 @Data
 @Builder(builderClassName = "Builder")
 @EqualsAndHashCode

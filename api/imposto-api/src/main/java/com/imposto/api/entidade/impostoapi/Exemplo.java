@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 
 @Entity
-@Table(name = "EXEMPLO", schema = "IMPOSTO")
+@Table(name = "EXEMPLO")
 @Data
 @Builder(builderClassName = "Builder")
 @EqualsAndHashCode

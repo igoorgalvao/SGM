@@ -28,7 +28,6 @@ public class ExemploRest {
 	@PostMapping("/salvar")
 	public ResponseEntity<?> salvar(@RequestBody ExemploDTO dto) {
 
-
 		ExemploDTO exemplo = service.salvar(dto);
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(exemplo);
