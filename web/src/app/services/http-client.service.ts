@@ -10,6 +10,10 @@ export class HttpClientService {
     protected baseUrl: string;
 
     constructor(@Inject(String) path: string) {
-        this.baseUrl = `${environment.urlbackend}:${environment.port}/${environment.contextPath}${path}`;
+        if(environment.useheroky){
+            this.baseUrl = `${environment.urlbackendheroku}/${environment.contextPath}${path}`;
+        }else{
+            this.baseUrl = `${environment.urlbackend}:${environment.port}/${environment.contextPath}${path}`;
+        }
     }
 }
